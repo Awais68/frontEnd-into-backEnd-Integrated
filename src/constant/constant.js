@@ -3,12 +3,12 @@ const prodUrl = "https://backend-start-t1yw.onrender.com/";
 
 export const BASE_URL = devUrl;
 
-export const AppRoutes = {
+export const appRoutes = {
   login: BASE_URL + "auth/login",
   register: BASE_URL + "auth/register",
-  getMyInfo: BASE_URL + "user/myInfo",
-  getCourses: BASE_URL + "course",
+  getMyInfo: BASE_URL + "users/myInfo",
+  getCourse: BASE_URL + "course",
   addCourse: BASE_URL + "course",
 };
 
-export default AppRoutes;
+export default appRoutes;
