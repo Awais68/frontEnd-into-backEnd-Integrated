@@ -5,11 +5,6 @@ import { AuthContext } from './context/AuthContext.jsx';
 import { useContext } from 'react';
 import Cookies from 'js-cookie';
 
-
-
-
-
-
 function App() {
   // const [count, setCount] = useState(0)
   const { user } = useContext(AuthContext)
@@ -23,7 +18,7 @@ function App() {
         <Routes>
 
           <Route path="/" element={user ? <Navigate to={'/user'} /> : <Login />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/user" element={user ? <User /> : <Navigate to={'/'} />} />
         </Routes>
       </div>
     </>
