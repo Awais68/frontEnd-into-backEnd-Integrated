@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         console.log("response from get my Info  API=>>>", res.data);
-        setUser(res.data.user);
+        setUser(res.data.data);
 
       })
       .catch((err) => console.log(err))

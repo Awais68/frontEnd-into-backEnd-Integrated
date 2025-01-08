@@ -4,6 +4,8 @@ import User from './pages/User/user.jsx';
 import { AuthContext } from './context/AuthContext.jsx';
 import { useContext } from 'react';
 import Cookies from 'js-cookie';
+import Students from './pages/students/students.jsx';
+
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -14,11 +16,12 @@ function App() {
   return (
     <>
       <div className='text-center bg-blue-100  flex  min-h-screen min-w-[1440pv] ' >
-        <div className='flex justify-end content-end items-center '>hello </div>
+
         <Routes>
 
           <Route path="/" element={user ? <Navigate to={'/user'} /> : <Login />} />
-          <Route path="/user" element={user ? <User /> : <Navigate to={'/'} />} />
+          <Route path="/user" element={user ? <Students /> : <Navigate to={'/'} />} />
+         
         </Routes>
       </div>
     </>

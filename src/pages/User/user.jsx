@@ -21,8 +21,6 @@ export default function User() {
     }, []);
 
     const getCourses = () => {
-        console.log("cookies in getcourses>", Cookies.get("token"));
-
         axios
             .get(appRoutes.getCourse, {
                 headers: {
@@ -30,23 +28,22 @@ export default function User() {
                 },
             })
             .then((res) => {
+                console.log("res>", res),
                 setCourses(res.data?.data)
                 console.log("Courses=>", res);
             })
             .catch((err) => {
-                console.log("err", err);
-            });
+                console.log("Error fetching courses", err);
+            })
+
     };
 
     const handleAddCourse = () => {
+        // console.log("cookies in handleCourse>", Cookies.get("token"));
+        console.log("New Course=>", newCourse);
         axios
             .post(
-                appRoutes.addCourse, { courses },
-                {
-                    title: newCourse.title,
-                    description: newCourse.description,
-                    thumbnail: newCourse.thumbnail,
-                },
+                appRoutes.addCourse, newCourse,
                 {
                     headers: {
                         Authorization: `Bearer ${Cookies.get("token")}`,
@@ -54,12 +51,15 @@ export default function User() {
                 }
             )
             .then((res) => {
+                // console.log("cookies in axios catch>", Cookies.get("token"));
                 console.log("Course added successfully!", res);
-                setShowModal('true');
-                getCourses(); // Refresh courses after adding
+
+                setShowModal(false);
+                // getCourses(); // Refresh courses after adding
             })
             .catch((err) => {
                 console.log("Error adding course", err);
+                console.log("cookies in axios catch>", Cookies.get("token"));
             });
     };
 
@@ -68,28 +68,32 @@ export default function User() {
         setNewCourse({ ...newCourse, [name]: value });
     };
 
+
+
     return (
         <>
             <Navbar />
-            <div className="p-4">
-                <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    onClick={() => setShowModal(true)}
-                >
-                    Add Course
-                </button>
+            <div className="p-4 mx-auto max-w-full">
+                <div className="flex justify-end gap-4 items-center mt-4 mx-auto">
+                    <button
+                        className="bg-blue-500 text-white px-4 py-2 gap-4 rounded hover:bg-blue-600"
+                        onClick={() => setShowModal(true)}
+                    >
+                        Add Course
+                    </button>
 
 
-                <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    onClick={() => {
-                        Cookies.set('token', null)
-                        setUser(null)
-                    }}
-                >
-                    Logout
-                </button>
+                    <button
+                        className="bg-blue-500 text-white px-4 py-2 gap-4 rounded hover:bg-blue-600"
+                        onClick={() => {
+                            Cookies.set('token', null)
+                            setUser(null)
+                        }}
+                    >
+                        Logout
+                    </button>
 
+                </div>
             </div>
 
             {/* Modal */}
@@ -147,13 +151,17 @@ export default function User() {
 
             <div className="grid grid-cols-3 gap-10">
                 {courses?.map((course) => {
-                   
-                        <div className="h-40 border rounded overflow-hidden">
-                            <img src={course.thumbnail} className="h-32 w-full" />
-                            <h1 className="font-bold my-5">{course.title}</h1>
-                            <h1 className="font-bold ">{course.description}</h1>
-                        </div>
+                    console.log("course=>", course);
                     
+                    return (
+                        <div className="border rounded overflow-hidden">
+                            <img src={course.thumbnail} className="h-48 w-full" />
+                            <div className="p-2 ">
+                                <h1 className="font-bold">{course.title}</h1>
+                                <h1>{course.description}</h1>
+                            </div>
+                        </div>
+                    );
                 })}
             </div>
         </>

@@ -8,6 +8,7 @@ export const appRoutes = {
   register: BASE_URL + "auth/register",
   getMyInfo: BASE_URL + "users/myInfo",
   getCourse: BASE_URL + "course",
+  getStudents: BASE_URL + "students",
   addCourse: BASE_URL + "course",
 };
 
