@@ -20,8 +20,9 @@ function App() {
         <Routes>
 
           <Route path="/" element={user ? <Navigate to={'/user'} /> : <Login />} />
-          <Route path="/user" element={user ? <Students /> : <Navigate to={'/'} />} />
-         
+
+          <Route path="/user" element={user ? <student /> : <Navigate to={'/'} />} />
+          {/* <Route path="/user" element={user ? <Students /> : <Navigate to={'/students'} />} /> */}
         </Routes>
       </div>
     </>

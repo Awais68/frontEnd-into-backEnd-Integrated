@@ -61,7 +61,7 @@ export default function Students() {
     return (
         <div>
             <div className="container mx-auto p-4" >
-                <h1 className="text-2xl font-bold">Students</h1>
+                <h1 className="text-2xl w-full  font-bold gap-10 bg-blue-400">Students</h1>
                 <div>
                     <select
                         onChange={(e) => setFilter({ ...filter, course: e.target.value })}
@@ -133,8 +133,43 @@ export default function Students() {
 
                     </select>
 
+                    <h1 className="text-5xl font-bold text-end flex-grow">
+                        {students.count} Students
+                    </h1>
+
+                </div>
+                <div className="flex gap-10 mt-5">
+                    {students.studentByCourse.map((data) => (
+
+                        <div key={data._id} className="border p-2 shadow rounded  my-2">
+                            <h1 className="font-bold ">
+                                {data.course.title} : {data.totalQuantity}
+                            </h1>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="grid grid-cols-3 gap-10 mt-5">
+                    {students?.students?.map((student) => {
+                        return (
+                            <div key={student._id} className="border p-2 shadow rounded overflow-hidden">
+                                <div>
+
+                                <h1 className="font-bold ">
+                                    {student.name + " " + student.father_name}
+                                </h1>
+                                <h1 className="font-bold ">{student.city}</h1>
+                                <h1>Course : { student.course.title} </h1>
+                                <h1>Age : { student.age} </h1>
+                                <h1>City : { student.city} </h1>
+                                <h1>Country : { student.country} </h1>
+                                </div>
+                            </div>
+                        )
+
+                    })}
                 </div>
             </div>
         </div>
     )
-}
+} 
